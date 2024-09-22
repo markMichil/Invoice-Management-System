@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['ADMIN', 'EMPLOYEE']);
+            $table->softDeletes(); // Adds deleted_at field for soft delete
             $table->rememberToken();
             $table->timestamps();
         });
