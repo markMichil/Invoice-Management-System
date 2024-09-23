@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('action'); // e.g., create, update, delete
             $table->foreignId('invoice_id')->constrained()->onDelete('cascade'); // Related invoice
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // The user who performed the action
-            $table->enum('user_role',['ADMIN','EMPLoYEE']); // e.g., ADMIN, EMPLOYEE
+            $table->enum('user_role',['ADMIN','EMPLOYEE']); // e.g., ADMIN, EMPLOYEE
             $table->timestamps(); // Will automatically store action timestamp
         });
     }

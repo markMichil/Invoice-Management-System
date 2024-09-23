@@ -25,11 +25,13 @@ Route::middleware(['auth:sanctum',IsAdminOrEmployee::class ])->group(function ()
     // Admin routes
     Route::get('/invoices', [InvoiceController::class, 'index']);  // List all invoices
     Route::get('/invoices/{id}', [InvoiceController::class, 'show']);  // View specific invoice
+    Route::put('/invoices/{id}', [InvoiceController::class,'update']);  // Update invoice
+    Route::put('/invoices/{id}/delivery-status', [InvoiceController::class, 'updateDeliveryStatus']); // Update delivery status
+
 });
 
 Route::middleware(['auth:sanctum',IsAdmin::class ])->group(function () {
     Route::post('/invoices', [InvoiceController::class,'store']);  // Create invoice
-    Route::put('/invoices/{id}', [InvoiceController::class,'update']);  // Update invoice
     Route::delete('/invoices/{id}', [InvoiceController::class,'destroy']);  // Delete invoice
 });
 
