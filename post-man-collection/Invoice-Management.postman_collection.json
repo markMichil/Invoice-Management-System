@@ -1,0 +1,1427 @@
+{
+	"info": {
+		"_postman_id": "868b05e3-efda-48fc-aa9b-f9103c3880a7",
+		"name": "Invoice-Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27078309"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // email - required employee@example.com OR admin@example.com\r\n    \"email\":\"admin@example.com\", \r\n    // password - required value passsword\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"amam@amasm.vom\",\r\n    \"password\":\"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 12:14:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 401,\n    \"status\": false,\n    \"message\": \"Unauthorized\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "login successfully",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // email - required\r\n    \"email\":\"admin@example.com\", \r\n    // password - required\r\n    \"password\":\"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 12:15:37 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"login successfully\",\n    \"data\": {\n        \"type\": \"Bearer\",\n        \"token\": \"2|xNxG5kcFs0ZF6tH9iBgFXquz0GKBuZ7ffRwtMVJ5c68da4c1\",\n        \"user\": {\n            \"id\": 1,\n            \"name\": \"Admin User\",\n            \"email\": \"admin@example.com\",\n            \"email_verified_at\": null,\n            \"role\": \"ADMIN\",\n            \"deleted_at\": null,\n            \"created_at\": \"2024-09-22T14:43:55.000000Z\",\n            \"updated_at\": \"2024-09-22T14:43:55.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "LOGOUT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "SUCC",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/logout",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 12:18:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"Logged out\",\n    \"data\": []\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "INVOICES",
+			"item": [
+				{
+					"name": "LIST ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // optinal by deafault 10 per request\r\n    // \"paginate\":1\r\n    //search optinal invoice serial \r\n    // \"search\":\"911\"\r\n    // type PAID | UNPAID\r\n    //    \"type\":\"PAID\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "succ",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // optinal by deafault 10 per request\r\n    // \"paginate\":1,\r\n    //search optinal invoice serial \r\n    // \"search\":\"66f17\",\r\n    // type PAID | UNPAID\r\n    //    \"type\":\"PAID\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 14:36:14 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": null,\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"customer_id\": 1,\n                \"amount\": \"150.00\",\n                \"status\": \"PAID\",\n                \"invoice_date\": \"2024-09-01\",\n                \"description\": null,\n                \"deleted_at\": null,\n                \"created_at\": \"2024-09-23T14:28:37.000000Z\",\n                \"updated_at\": \"2024-09-23T14:28:37.000000Z\",\n                \"serial_number\": \"INV-66f17b15ef098\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"Admin User\"\n                },\n                \"customer\": {\n                    \"id\": 1,\n                    \"name\": \"John Doe\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"user_id\": 1,\n                \"customer_id\": 2,\n                \"amount\": \"200.00\",\n                \"status\": \"UNPAID\",\n                \"invoice_date\": \"2024-09-01\",\n                \"description\": null,\n                \"deleted_at\": null,\n                \"created_at\": \"2024-09-23T14:28:38.000000Z\",\n                \"updated_at\": \"2024-09-23T14:28:38.000000Z\",\n                \"serial_number\": \"INV-66f17b161e911\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"Admin User\"\n                },\n                \"customer\": {\n                    \"id\": 2,\n                    \"name\": \"Jane Smith\"\n                }\n            }\n        ],\n        \"first_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"from\": 1,\n        \"last_page\": 1,\n        \"last_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": null,\n        \"path\": \"http://127.0.0.1:8000/api/invoices\",\n        \"per_page\": 10,\n        \"prev_page_url\": null,\n        \"to\": 2,\n        \"total\": 2\n    }\n}"
+						},
+						{
+							"name": "optional pagination",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // optinal by deafault 10 per request\r\n    \"paginate\":1\r\n    //search optinal invoice serial \r\n    // \"search\":\"66f17\",\r\n    // type PAID | UNPAID\r\n    //    \"type\":\"PAID\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 14:37:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": null,\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"customer_id\": 1,\n                \"amount\": \"150.00\",\n                \"status\": \"PAID\",\n                \"invoice_date\": \"2024-09-01\",\n                \"description\": null,\n                \"deleted_at\": null,\n                \"created_at\": \"2024-09-23T14:28:37.000000Z\",\n                \"updated_at\": \"2024-09-23T14:28:37.000000Z\",\n                \"serial_number\": \"INV-66f17b15ef098\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"Admin User\"\n                },\n                \"customer\": {\n                    \"id\": 1,\n                    \"name\": \"John Doe\"\n                }\n            }\n        ],\n        \"first_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"from\": 1,\n        \"last_page\": 2,\n        \"last_page_url\": \"http://127.0.0.1:8000/api/invoices?page=2\",\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=2\",\n                \"label\": \"2\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=2\",\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": \"http://127.0.0.1:8000/api/invoices?page=2\",\n        \"path\": \"http://127.0.0.1:8000/api/invoices\",\n        \"per_page\": 1,\n        \"prev_page_url\": null,\n        \"to\": 1,\n        \"total\": 2\n    }\n}"
+						},
+						{
+							"name": "optional search",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // optinal by deafault 10 per request\r\n    // \"paginate\":1\r\n    //search optinal invoice serial \r\n    \"search\":\"911\"\r\n    // type PAID | UNPAID\r\n    //    \"type\":\"PAID\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 14:38:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": null,\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 2,\n                \"user_id\": 1,\n                \"customer_id\": 2,\n                \"amount\": \"200.00\",\n                \"status\": \"UNPAID\",\n                \"invoice_date\": \"2024-09-01\",\n                \"description\": null,\n                \"deleted_at\": null,\n                \"created_at\": \"2024-09-23T14:28:38.000000Z\",\n                \"updated_at\": \"2024-09-23T14:28:38.000000Z\",\n                \"serial_number\": \"INV-66f17b161e911\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"Admin User\"\n                },\n                \"customer\": {\n                    \"id\": 2,\n                    \"name\": \"Jane Smith\"\n                }\n            }\n        ],\n        \"first_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"from\": 1,\n        \"last_page\": 1,\n        \"last_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": null,\n        \"path\": \"http://127.0.0.1:8000/api/invoices\",\n        \"per_page\": 10,\n        \"prev_page_url\": null,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+						},
+						{
+							"name": "optional filter",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // optinal by deafault 10 per request\r\n    // \"paginate\":1\r\n    //search optinal invoice serial \r\n    // \"search\":\"911\"\r\n    // type PAID | UNPAID\r\n       \"type\":\"PAID\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 14:41:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": null,\n    \"data\": {\n        \"current_page\": 1,\n        \"data\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"customer_id\": 1,\n                \"amount\": \"150.00\",\n                \"status\": \"PAID\",\n                \"invoice_date\": \"2024-09-01\",\n                \"description\": null,\n                \"deleted_at\": null,\n                \"created_at\": \"2024-09-23T14:28:37.000000Z\",\n                \"updated_at\": \"2024-09-23T14:28:37.000000Z\",\n                \"serial_number\": \"INV-66f17b15ef098\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"Admin User\"\n                },\n                \"customer\": {\n                    \"id\": 1,\n                    \"name\": \"John Doe\"\n                }\n            }\n        ],\n        \"first_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"from\": 1,\n        \"last_page\": 1,\n        \"last_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"links\": [\n            {\n                \"url\": null,\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n                \"label\": \"1\",\n                \"active\": true\n            },\n            {\n                \"url\": null,\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": null,\n        \"path\": \"http://127.0.0.1:8000/api/invoices\",\n        \"per_page\": 10,\n        \"prev_page_url\": null,\n        \"to\": 1,\n        \"total\": 1\n    }\n}"
+						},
+						{
+							"name": "with page",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // optinal by deafault 10 per request\r\n    \"paginate\":1\r\n    //search optinal invoice serial \r\n    // \"search\":\"911\"\r\n    // type PAID | UNPAID\r\n    //    \"type\":\"PAID\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices?page=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 19:18:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": null,\n    \"data\": {\n        \"current_page\": 2,\n        \"data\": [\n            {\n                \"id\": 4,\n                \"user_id\": 1,\n                \"customer_id\": 1,\n                \"amount\": \"100.00\",\n                \"status\": \"UNPAID\",\n                \"invoice_date\": \"2024-09-23\",\n                \"description\": \"from api postman\",\n                \"deleted_at\": null,\n                \"created_at\": \"2024-09-23T18:06:10.000000Z\",\n                \"updated_at\": \"2024-09-23T18:06:10.000000Z\",\n                \"serial_number\": \"INV-66f1ae12f1474\",\n                \"user\": {\n                    \"id\": 1,\n                    \"name\": \"Admin User\"\n                },\n                \"customer\": {\n                    \"id\": 1,\n                    \"name\": \"John Doe\"\n                }\n            }\n        ],\n        \"first_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"from\": 2,\n        \"last_page\": 3,\n        \"last_page_url\": \"http://127.0.0.1:8000/api/invoices?page=3\",\n        \"links\": [\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n                \"label\": \"&laquo; Previous\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n                \"label\": \"1\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=2\",\n                \"label\": \"2\",\n                \"active\": true\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=3\",\n                \"label\": \"3\",\n                \"active\": false\n            },\n            {\n                \"url\": \"http://127.0.0.1:8000/api/invoices?page=3\",\n                \"label\": \"Next &raquo;\",\n                \"active\": false\n            }\n        ],\n        \"next_page_url\": \"http://127.0.0.1:8000/api/invoices?page=3\",\n        \"path\": \"http://127.0.0.1:8000/api/invoices\",\n        \"per_page\": 1,\n        \"prev_page_url\": \"http://127.0.0.1:8000/api/invoices?page=1\",\n        \"to\": 2,\n        \"total\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "LIST BY ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoices/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoices",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "wrong id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 14:47:49 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 400,\n    \"status\": false,\n    \"message\": \"No query results for model [App\\\\Models\\\\Invoice] 100\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "succ",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 14:48:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": null,\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"customer_id\": 1,\n        \"amount\": \"150.00\",\n        \"status\": \"PAID\",\n        \"invoice_date\": \"2024-09-01\",\n        \"description\": null,\n        \"deleted_at\": null,\n        \"created_at\": \"2024-09-23T14:28:37.000000Z\",\n        \"updated_at\": \"2024-09-23T14:28:37.000000Z\",\n        \"serial_number\": \"INV-66f17b15ef098\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "STORE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer_id\":1,  // REQUIRED\r\n    \"amount\":\"100\", // REQUIRED min 1 \r\n    \"description\":\"from api postman\", // OPTINAL STRING \r\n    \"invoice_date\":\"2024-09-23\" // REQUIRED format Y-m-d.\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoices",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoices"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer_id\":5,  // REQUIRED\r\n    \"amount\":100, // REQUIRED min 1 \r\n    \"description\":100, // OPTINAL STRING \r\n    \"invoice_date\":10110 // REQUIRED\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 15:18:44 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 422,\n    \"status\": false,\n    \"message\": \"Error\",\n    \"data\": {\n        \"customer_id\": [\n            \"The selected customer ID does not exist.\"\n        ],\n        \"description\": [\n            \"The description must be a string.\"\n        ],\n        \"invoice_date\": [\n            \"The invoice date must be a valid date.\",\n            \"The invoice date must be in the format Y-m-d.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "succ",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"customer_id\":1,  // REQUIRED\r\n    \"amount\":\"100\", // REQUIRED min 1 \r\n    \"description\":\"from api postman\", // OPTINAL STRING \r\n    \"invoice_date\":\"2024-09-23\" // REQUIRED format Y-m-d.\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 15:23:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": null,\n    \"data\": {\n        \"customer_id\": 1,\n        \"amount\": \"100\",\n        \"description\": \"from api postman\",\n        \"invoice_date\": \"2024-09-23\",\n        \"user_id\": 1,\n        \"serial_number\": \"INV-66f187ecb1d45\",\n        \"updated_at\": \"2024-09-23T15:23:24.000000Z\",\n        \"created_at\": \"2024-09-23T15:23:24.000000Z\",\n        \"id\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "failed status",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\":\"UNPAIDs\" // OPTIONAL IN PAID | UNPAID\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 15:41:48 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 422,\n    \"status\": false,\n    \"message\": \"Validation error\",\n    \"data\": {\n        \"status\": [\n            \"The selected status must be either PAID or UNPAID.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "succ",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\":\"PAID\" // OPTIONAL IN PAID | UNPAID\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 15:42:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"Updated Successfully\",\n    \"data\": {\n        \"id\": 3,\n        \"user_id\": 1,\n        \"customer_id\": 1,\n        \"amount\": \"100.00\",\n        \"status\": \"PAID\",\n        \"invoice_date\": \"2024-09-23\",\n        \"description\": \"from api postman\",\n        \"deleted_at\": null,\n        \"created_at\": \"2024-09-23T15:23:24.000000Z\",\n        \"updated_at\": \"2024-09-23T15:42:42.000000Z\",\n        \"serial_number\": \"INV-66f187ecb1d45\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoices/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoices",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "unauthorized employee",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 18:10:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 403,\n    \"status\": false,\n    \"message\": \"Unauthorized YOU DONT HAS ADMIN PERMISSION\",\n    \"data\": []\n}"
+						},
+						{
+							"name": "failed invalid id",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/3526",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"3526"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 18:18:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 500,\n    \"status\": false,\n    \"message\": \"An error occurred\",\n    \"data\": \"No query results for model [App\\\\Models\\\\Invoice] 3526\"\n}"
+						},
+						{
+							"name": "succ",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 18:21:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"Invoice Delete Successfully \",\n    \"data\": {\n        \"id\": 2,\n        \"user_id\": 1,\n        \"customer_id\": 2,\n        \"amount\": \"200.00\",\n        \"status\": \"UNPAID\",\n        \"invoice_date\": \"2024-09-01\",\n        \"description\": null,\n        \"deleted_at\": \"2024-09-23T18:21:09.000000Z\",\n        \"created_at\": \"2024-09-23T14:28:38.000000Z\",\n        \"updated_at\": \"2024-09-23T18:21:09.000000Z\",\n        \"serial_number\": \"INV-66f17b161e911\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELIVERY STATUS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n      \"delivery_status\": \"DELIVERED\" //required|in:PENDING,CONFIRMED,ON_THE_WAY,DELIVERED\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/invoices/4/delivery-status",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"invoices",
+								"4",
+								"delivery-status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "invalid id",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n      \"delivery_status\": \"ON_THE_WAY\" //required|in:PENDING,CONFIRMED,ON_THE_WAY,DELIVERED\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/5/delivery-status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"5",
+										"delivery-status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 21:19:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 500,\n    \"status\": false,\n    \"message\": \"An error occurred\",\n    \"data\": \"No query results for model [App\\\\Models\\\\Invoice] 5\"\n}"
+						},
+						{
+							"name": "succ",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n      \"delivery_status\": \"ON_THE_WAY\" //required|in:PENDING,CONFIRMED,ON_THE_WAY,DELIVERED\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/invoices/4/delivery-status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"invoices",
+										"4",
+										"delivery-status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.12"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 23 Sep 2024 21:20:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"code\": 200,\n    \"status\": true,\n    \"message\": \"Updated Delivery Status Successfully\",\n    \"data\": {\n        \"id\": 4,\n        \"user_id\": 1,\n        \"customer_id\": 1,\n        \"amount\": \"100.00\",\n        \"status\": \"UNPAID\",\n        \"invoice_date\": \"2024-09-23\",\n        \"description\": \"from api postman\",\n        \"deleted_at\": null,\n        \"created_at\": \"2024-09-23T18:06:10.000000Z\",\n        \"updated_at\": \"2024-09-23T21:20:14.000000Z\",\n        \"serial_number\": \"INV-66f1ae12f1474\",\n        \"delivery_status\": \"ON_THE_WAY\",\n        \"customer\": {\n            \"id\": 1,\n            \"name\": \"John Doe\",\n            \"phone\": \"1234567890\",\n            \"email\": \"john@example.com\",\n            \"invoice_count\": 0,\n            \"deleted_at\": null,\n            \"created_at\": \"2024-09-23T14:28:37.000000Z\",\n            \"updated_at\": \"2024-09-23T14:28:37.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
