@@ -10,7 +10,26 @@ class Invoice extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['customer_id','user_id', 'amount', 'invoice_date', 'description'];
+    protected $fillable = [
+        'customer_id',
+        'user_id',
+        'amount',
+        'invoice_date',
+        'description',
+        'status',
+        'serial_number'
+    ];
+
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($invoice) {
+            // Generate a unique serial number
+            $invoice->serial_number = 'INV-' . uniqid(); // You can customize the format
+        });
+    }
 
     public function user()
     {
@@ -20,4 +39,7 @@ class Invoice extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+
+
 }
