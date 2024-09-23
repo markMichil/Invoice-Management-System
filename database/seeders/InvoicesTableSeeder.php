@@ -18,15 +18,15 @@ class InvoicesTableSeeder extends Seeder
             'customer_id' => 1,
             'amount' => 150.00,
             'invoice_date' => '2024-09-01',
-            'description' => 'Website development services'
+            'status' => 'PAID'
         ]);
 
         Invoice::create([
             'user_id' => 1,
             'customer_id' => 2,
             'amount' => 200.00,
-            'invoice_date' => '2024-09-05',
-            'description' => 'Graphic design services'
+            'invoice_date' => '2024-09-01',
+            'status' => 'UNPAID'
         ]);
     }
 }
