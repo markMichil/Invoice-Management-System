@@ -4,5 +4,5 @@ namespace App\Traits;
 
 trait GeneralTrait
 {
-   use ResponseMessageTrait , InvoiceLoggerTrait;
+   use ResponseMessageTrait , InvoiceLoggerTrait,NotifyCustomerTrait;
 }

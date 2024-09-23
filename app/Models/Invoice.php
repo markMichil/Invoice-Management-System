@@ -17,8 +17,15 @@ class Invoice extends Model
         'invoice_date',
         'description',
         'status',
-        'serial_number'
+        'serial_number',
+        'delivery_status'
     ];
+
+    // Delivery status enum options
+    const STATUS_PENDING = 'PENDING';
+    const STATUS_CONFIRMED = 'CONFIRMED';
+    const STATUS_ON_THE_WAY = 'ON_THE_WAY';
+    const STATUS_DELIVERED = 'DELIVERED';
 
 
     protected static function boot()
@@ -39,7 +46,6 @@ class Invoice extends Model
     {
         return $this->belongsTo(Customer::class);
     }
-
 
 
 }

@@ -99,4 +99,22 @@ class InvoiceController extends Controller
     {
         return $this->invoiceRepository->delete($id);
     }
+
+
+    public function updateDeliveryStatus(Request $request, $id)
+    {
+        try{
+            $request->validate([
+                'delivery_status' => 'required|in:PENDING,CONFIRMED,ON_THE_WAY,DELIVERED',
+            ]);
+
+            return  $this->invoiceRepository->updateDeliveryStatus($id, $request->delivery_status);
+
+        } catch (ValidationException $exception) {
+            return $this->responseMessage(422, false, 'Validation error', $exception->errors());
+        }
+
+    }
+
+
 }

@@ -109,4 +109,22 @@ class InvoiceRepository implements InvoiceRepositoryInterface
 
     }
 
+    public function updateDeliveryStatus($id, $status)
+    {
+        try{
+            $invoice = Invoice::findOrFail($id);
+            $invoice->delivery_status = $status;
+            $invoice->save();
+            // Log the 'update' action
+            $this->logAction('update', $invoice);
+
+            // Send notification email to the customer
+            $this->notifyCustomer($invoice);
+
+            return $this->responseMessage(200, true, "Updated Delivery Status Successfully", $invoice);
+        }catch (\Exception $exception){
+            return $this->responseMessage(500, false, 'An error occurred', $exception->getMessage());
+
+        }
+    }
 }
