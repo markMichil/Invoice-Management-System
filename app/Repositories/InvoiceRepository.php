@@ -3,13 +3,14 @@
 namespace App\Repositories;
 use App\Models\Invoice;
 use App\Interfaces\InvoiceRepositoryInterface;
-use App\Traits\ResponseMessageTrait;
+use App\Traits\GeneralTrait;
+
 use Illuminate\Support\Facades\Log;
 
 class InvoiceRepository implements InvoiceRepositoryInterface
 {
 
-    use ResponseMessageTrait;
+    use GeneralTrait;
 
     public function all($request)
     {
@@ -41,6 +42,10 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         $data['user_id'] = auth()->user()->id;
 
         $invoice =  Invoice::create($data);
+
+        // Log the 'create' action
+        $this->logAction('create', $invoice);
+
         return $this->responseMessage(200, true, null, $invoice);
     }
 
@@ -50,6 +55,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             $invoice = Invoice::findOrFail($id);
             $data['user_id'] = auth()->user()->id;
             $invoice->update($data);
+            // Log the 'update' action
+            $this->logAction('update', $invoice);
             return $this->responseMessage(200, true, "Updated Successfully", $invoice);
         }catch (\Exception $exception){
             return $this->responseMessage(500, false, 'An error occurred', $exception->getMessage());
@@ -66,6 +73,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             $invoice = Invoice::findOrFail($id);
             $invoice->delete();
 
+            // Log the 'delete' action
+            $this->logAction('delete', $invoice);
             return $this->responseMessage(200, true, "Invoice Delete Successfully ", $invoice);
         }catch (\Exception $exception){
             return $this->responseMessage(500, false, 'An error occurred', $exception->getMessage());
