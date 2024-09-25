@@ -67,4 +67,14 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_EMPLOYEE;
     }
+
+
+    public static function loginRules()
+    {
+        return[
+            'email'=>'required|email',
+            'password'=>'required',
+        ];
+    }
+
 }
