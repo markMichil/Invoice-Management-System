@@ -42,7 +42,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item has-treeview {{($pageTitle =='invoices')?'menu-open':''}}" >
+                <li class="nav-item has-treeview {{($pageTitle =='Invoices Page')?'menu-open':''}}" >
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-blog"></i>
                         <p>
@@ -52,7 +52,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('invoices.index')}}" class="nav-link">
                                 <i class="far  fa-eye"></i>
                                 <p>Show All</p>
                             </a>

@@ -12,11 +12,17 @@ class InvoiceRepository implements InvoiceRepositoryInterface
 
     use GeneralTrait;
 
-    public function all($request)
+    public function all($request,$resource='api')
     {
-        $paginate = (isset($request->paginate))?$request->paginate:10;
+        if($resource == 'api'){
+            $paginate = (isset($request->paginate))?$request->paginate:10;
 
-        return $this->filterAllInvoices($request)->paginate($paginate);
+            return $this->filterAllInvoices($request)->paginate($paginate);
+        }
+            return invoice::query()
+                ->with('user:id,name')
+                ->with('customer:id,name')
+                ->get();
 
     }
 
@@ -87,7 +93,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
     }
 
 
-    public function filterAllInvoices($request)  //Filter All Invoices
+    public function filterAllInvoicesApi($request)  //Filter All Invoices
     {
         $query = Invoice::query();
 
@@ -112,6 +118,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             ->with('customer:id,name');
 
     }
+
 
     public function updateDeliveryStatus($id, $status)
     {

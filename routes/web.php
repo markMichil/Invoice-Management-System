@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\InvoiceController;
 
 
 Route::get('/send-test-email', function () {
@@ -23,18 +24,29 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'handleLogin'])->name('adminLogin');
 
 
+Route::middleware(['auth:sanctum',IsAdmin::class ])->group(function () {
+    Route::resource('invoices', InvoiceController::class)->only(['create','store','edit','destroy']);
+
+});
+
+
+
 Route::middleware(['auth:sanctum',IsAdminOrEmployee::class ])->group(function () {
 
     Route::get('/', [HomeController::class,'index'])->name('adminDashboard');
     Route::get('/logs', [LogActionController::class,'index'])->name('logs');
-
-
     Route::resource('customers',CustomerController::class)->only(['index', 'show']);
+
+
+    // Admin routes
+    Route::get('/invoices', [InvoiceController::class, 'index'])->name('invoices.index');  // List all invoices
+    Route::get('/invoices/{id}', [InvoiceController::class, 'show']);  // View specific invoice
+    Route::put('/invoices/{id}', [InvoiceController::class,'update']);  // Update invoice
+    Route::put('/invoices/{id}/delivery-status', [InvoiceController::class, 'updateDeliveryStatus']); // Update delivery status
+
+
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('adminLogout');
 });
 
-Route::middleware(['auth:sanctum',IsAdmin::class ])->group(function () {
-
-});
 
