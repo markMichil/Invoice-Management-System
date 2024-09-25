@@ -13,7 +13,20 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             \App\Interfaces\InvoiceRepositoryInterface::class,
+
             \App\Repositories\InvoiceRepository::class
+
+
+        );
+
+        $this->app->bind(
+            \App\Interfaces\LogRepositoryInterface::class,
+            \App\Repositories\LogRepository::class
+        );
+
+        $this->app->bind(
+            \App\Interfaces\CustomerRepositoryInterface::class,
+            \App\Repositories\CustomerRepository::class
         );
     }
 

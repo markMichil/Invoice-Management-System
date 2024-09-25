@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 class InvoiceController extends Controller
 {
     use ResponseMessageTrait;
+
     protected $invoiceRepository;
 
     public function __construct(InvoiceRepositoryInterface $invoiceRepository)
@@ -60,7 +61,6 @@ class InvoiceController extends Controller
         return $this->invoiceRepository->find($id);
     }
 
-
     public function update(Request $request, $id)
     {
         try {
@@ -92,14 +92,10 @@ class InvoiceController extends Controller
             }
     }
 
-
-
-
     public function destroy($id)
     {
         return $this->invoiceRepository->delete($id);
     }
-
 
     public function updateDeliveryStatus(Request $request, $id)
     {

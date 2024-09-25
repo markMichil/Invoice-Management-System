@@ -11,4 +11,10 @@ class Customer extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ['name', 'phone', 'email', 'invoice_count'];
+
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }
