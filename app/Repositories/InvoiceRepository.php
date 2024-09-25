@@ -16,20 +16,20 @@ class InvoiceRepository implements InvoiceRepositoryInterface
     {
         $paginate = (isset($request->paginate))?$request->paginate:10;
 
-        $invoices = $this->filterAllInvoices($request)
-                                            ->paginate($paginate);
+        return $this->filterAllInvoices($request)->paginate($paginate);
 
-        return $this->responseMessage(200, true, null, $invoices);
     }
 
     public function find($id)
     {
         try{
             $invoice =  Invoice::findOrFail($id);
-            return $this->responseMessage(200, true, null, $invoice);
+            return ['status'=>true,'msg'=>'','data'=>$invoice];
+
         }catch (\Exception $exception){
             Log::error('InvoiceRepository.find : '.$exception->getMessage());
-            return $this->responseMessage(400, false, $exception->getMessage(), []);
+            return ['status'=>false,'msg'=> $exception->getMessage(),'data'=> []];
+
         }
 
 
@@ -46,7 +46,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         // Log the 'create' action
         $this->logAction('create', $invoice);
 
-        return $this->responseMessage(200, true, null, $invoice);
+        return $invoice;
     }
 
     public function update($id, array $data)
@@ -57,10 +57,14 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             $invoice->update($data);
             // Log the 'update' action
             $this->logAction('update', $invoice);
-            return $this->responseMessage(200, true, "Updated Successfully", $invoice);
-        }catch (\Exception $exception){
-            return $this->responseMessage(500, false, 'An error occurred', $exception->getMessage());
 
+            return ['status'=>true,'msg'=>'','data'=>$invoice];
+
+        }catch (\Exception $exception){
+
+
+            Log::error('InvoiceRepository.update : '.$exception->getMessage());
+            return ['status'=>false,'msg'=> $exception->getMessage(),'data'=> []];
         }
 
     }
@@ -75,10 +79,10 @@ class InvoiceRepository implements InvoiceRepositoryInterface
 
             // Log the 'delete' action
             $this->logAction('delete', $invoice);
-            return $this->responseMessage(200, true, "Invoice Delete Successfully ", $invoice);
-        }catch (\Exception $exception){
-            return $this->responseMessage(500, false, 'An error occurred', $exception->getMessage());
+            return ['status'=>true,'msg'=>'','data'=>$invoice];
 
+        }catch (\Exception $exception){
+            return ['status'=>false,'msg'=>$exception->getMessage(),'data'=>[]];
         }
     }
 
@@ -121,9 +125,11 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             // Send notification email to the customer
             $this->notifyCustomer($invoice);
 
-            return $this->responseMessage(200, true, "Updated Delivery Status Successfully", $invoice);
+            return ['status'=>true,'msg'=>'Updated Delivery Status Successfully','data'=>$invoice];
+
         }catch (\Exception $exception){
-            return $this->responseMessage(500, false, 'An error occurred', $exception->getMessage());
+            return ['status'=>false,'msg'=>$exception->getMessage(),'data'=>$invoice];
+
 
         }
     }
