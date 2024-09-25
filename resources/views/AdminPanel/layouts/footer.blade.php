@@ -15,6 +15,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 <!-- Summernote -->
 <script src="{{url('dashboard')}}/plugins/summernote/summernote-bs4.min.js"></script>
+
+
+@yield('script')
+
 <script type="text/javascript">
     tinymce.init({
         selector: 'textarea.menubar',

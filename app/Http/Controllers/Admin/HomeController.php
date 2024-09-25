@@ -15,22 +15,9 @@ class HomeController extends Controller
 
    public function index(){
 
-
-       if (Auth::check() &&  Auth::user()->isAdmin()) {
-           return view('AdminPanel.PagesContent.index')->with('pageTitle',$this->pageTitle);
-
-       }
-       return redirect()->route('adminLogin');
-
-
-   }
-   public function login(){
-       return view('AdminPanel.login');
+       return view('AdminPanel.PagesContent.index')->with('pageTitle',$this->pageTitle);
    }
 
-   public function logout(){
-       return view('AdminPanel.login');
-   }
 
 
 

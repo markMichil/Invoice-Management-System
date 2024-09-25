@@ -20,12 +20,18 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{url('dashboard')}}/dist/css/adminlte.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="{{url('dashboard')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+{{--    <link rel="stylesheet" href="{{url('dashboard')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css">--}}
     <!-- summernote -->
     <link rel="stylesheet" href="{{url('dashboard')}}/plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+    <!-- Include DataTables CSS -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <!-- Include jQuery and DataTables JS -->
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
 
     <script src="https://cdn.tiny.cloud/1/pc73qh3xg75ffaapgngtse96urkahxvrblj37wlm16j0nvnj/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>

@@ -3,7 +3,7 @@
 
     <div class="page-title">
         <div class="title_left">
-            <h3><i class="fa fa-hospital-o"></i> <a href="{{route('adminDashboard')}}">Home</a> / View
+            <h3><i class="fa fa-hospital-o"></i> <a href="{{route('adminDashboard')}}"> Home </a> / View
 
             </h3>
         </div>
@@ -18,36 +18,25 @@
                         <tbody>
                         <tr>
                             <th>  Name :</th>
-                            <td>{{$board->name}}</td>
+                            <td>{{$customer->name}}</td>
                         </tr>
 
                         <tr>
-                            <th>  Arabic Name :</th>
-                            <td>{{$board->name_ar}}</td>
+                            <th>  Phone :</th>
+                            <td>{{$customer->phone}}</td>
                         </tr>
 
                         <tr>
-                            <th>Description</th>
-                            <td>{!! $board->description !!}</td>
+                            <th>Email : </th>
+                            <td>{{ $customer->email }}</td>
                         </tr>
 
                         <tr>
-                            <th>Arabic Description:</th>
-                            <td>{!! $board->description_ar !!}</td>
+                            <th>invoice Count :</th>
+                            <td>{{ $customer->invoice_count }}</td>
                         </tr>
 
-                        <tr>
-                            <th>Member Image</th>
-                            <td><img src="{{url($board->author_image)}}" width="200" height="200"></td>
-                        </tr>
-                        <tr>
 
-                            <th>Control</th>
-                            <td>
-                                <a href="{{route('board.edit',$board)}}"
-                                   class="btn  btn-primary">Edit</a>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
