@@ -1,12 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\InvoiceController;
-
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsAdminOrEmployee;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 
 Route::get('/user', function (Request $request) {

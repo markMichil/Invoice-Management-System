@@ -1,6 +1,7 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Interfaces\InvoiceRepositoryInterface;
 use App\Traits\ResponseMessageTrait;
 use Illuminate\Http\Request;
@@ -19,7 +20,9 @@ class InvoiceController extends Controller
 
     public function index(Request $request)
     {
-        return $this->invoiceRepository->all($request);
+        $invoices =  $this->invoiceRepository->all($request);
+
+        return $this->responseMessage(200, true, null, $invoices);
     }
 
     public function store(Request $request)
@@ -46,9 +49,7 @@ class InvoiceController extends Controller
             ]);
 
 
-
-            return $this->invoiceRepository->create($data);
-
+            return $this->responseMessage(200, true, null, $this->invoiceRepository->create($data));
         } catch (ValidationException $exception) {
 
             return $this->responseMessage(422,false,'Validation error' ,$exception->errors());
@@ -58,7 +59,11 @@ class InvoiceController extends Controller
 
     public function show($id)
     {
-        return $this->invoiceRepository->find($id);
+        $data =  $this->invoiceRepository->find($id);
+        if($data['status'])
+        return $this->responseMessage(200, true, null, $data['data']);
+
+        return $this->responseMessage(400, false, $data['msg'],$data['data']);
     }
 
     public function update(Request $request, $id)
@@ -83,8 +88,13 @@ class InvoiceController extends Controller
         ]);
 
         // Update the invoice
-        return $this->invoiceRepository->update($id, $data);
+           $data =  $this->invoiceRepository->update($id, $data);
 
+            if($data['status'])
+                return $this->responseMessage(200, true, "Updated Successfully",$data['data'] );
+
+
+            return $this->responseMessage(400, false, $data['msg'],$data['data']);
             } catch (ValidationException $exception) {
                     return $this->responseMessage(422, false, 'Validation error', $exception->errors());
                     } catch (\Exception $e) {
@@ -94,7 +104,13 @@ class InvoiceController extends Controller
 
     public function destroy($id)
     {
-        return $this->invoiceRepository->delete($id);
+        $data =  $this->invoiceRepository->delete($id);
+
+        if($data['status'])
+            return $this->responseMessage(200, true, "Invoice Delete Successfully ", $data['data']);
+
+
+        return $this->responseMessage(400, false, $data['msg'],$data['data']);
     }
 
     public function updateDeliveryStatus(Request $request, $id)
@@ -104,7 +120,11 @@ class InvoiceController extends Controller
                 'delivery_status' => 'required|in:PENDING,CONFIRMED,ON_THE_WAY,DELIVERED',
             ]);
 
-            return  $this->invoiceRepository->updateDeliveryStatus($id, $request->delivery_status);
+            $data =  $this->invoiceRepository->updateDeliveryStatus($id, $request->delivery_status);
+            if($data['status'])
+            return $this->responseMessage(200, true, "Updated Delivery Status Successfully", $data['data']);
+
+            return $this->responseMessage(500, false, 'An error occurred '.$data['msg'] ,$data['data']);
 
         } catch (ValidationException $exception) {
             return $this->responseMessage(422, false, 'Validation error', $exception->errors());
