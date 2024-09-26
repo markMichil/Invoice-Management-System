@@ -1,6 +1,13 @@
 
 ## About Invoice Management System
-
+-   
+- Admin Panel:
+  - Login/logout
+  - List customer
+  - List/add action log book
+  - Crud invoice
+  - Mail with update
+  
 - API application:
   -    
       -FEATURES : 
