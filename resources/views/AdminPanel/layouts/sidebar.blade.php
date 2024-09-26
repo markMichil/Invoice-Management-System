@@ -27,22 +27,17 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('customers.index')}}" class="nav-link">
-                                <i class="far  fa-eye" {{($pageTitle =='Customer Page')?'active':''}}></i>
+                            <a href="{{route('customers.index')}}" class="nav-link {{($pageTitle =='Customer Page')?'active':''}}">
+                                <i class="far  fa-eye" ></i>
                                 <p>All Customers</p>
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="{{route('customers.index')}}" class="nav-link {{($pageTitle =='Customer Page')?'active':''}}" disabled>
-                                <i class="far fa  fa-plus"></i>
-                                <p>New Customer</p>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
 
-                <li class="nav-item has-treeview {{($pageTitle =='invoices')?'menu-open':''}}" >
+                <li class="nav-item has-treeview {{($pageTitle =='Invoices Page')?'menu-open':''}}" >
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-blog"></i>
                         <p>
@@ -51,19 +46,14 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item ">
+                            <a href="{{route('invoices.index')}}" class="nav-link {{($pageTitle =='Invoices Page')?'active':''}}">
                                 <i class="far  fa-eye"></i>
                                 <p>Show All</p>
                             </a>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa  fa-plus"></i>
-                                <p>Add New Invoice</p>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
 

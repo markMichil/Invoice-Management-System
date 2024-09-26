@@ -8,7 +8,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('adminDashboard')}}">Home</a></li>
-                        <li class="breadcrumb-item active">{{isset($News)?'Edit '.$News->name :'ADD'}}</li>
+                        <li class="breadcrumb-item active">{{isset($invoice)?'Edit '.$invoice->name :'ADD'}}</li>
                     </ol>
                 </div>
                 <div class="col-sm-6">
@@ -29,54 +29,76 @@
 
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="{{(isset($News))?route('news.update',$News):route('news.store')}}"
+                        <form action="{{(isset($invoice))?route('invoices.update',$invoice):route('invoices.store')}}"
                               method="post" enctype="multipart/form-data">
                             @include('AdminPanel.layouts.messages')
                             @csrf
-                            {{isset($News)?method_field('PUT'):''}}
+                            {{isset($invoice)?method_field('PUT'):''}}
                             <div class="card-body">
+
                                 <div class="form-group">
-                                    <label for="name">Title</label>
-                                    <input type="text" name="title" class="form-control"
-                                           placeholder="Enter title"
-                                           value="@if(old('title')){{old('title')}}@elseif(isset($News->title)){{$News->title}}@endif"
-                                           required>
+                                    <label for="name">Customer</label>
+
+                                    <select name="customer_id" class="form-control">
+                                        <option disabled {{(isset($invoice->customer_id))?'':'selected'}}> choose Customer type</option>
+                                        @if(count($customers)>0)
+                                            @foreach($customers as $customer)
+                                                <option value="{{$customer->id}}" {{(isset($invoice->customer_id) && $invoice->customer_id ==$customer->id )?'selected':''}})> {{$customer->name}}</option>
+                                            @endforeach
+
+
+                                        @else
+                                            <option disabled> Add Customer First</option>
+                                        @endif
+
+                                    </select>
+
                                 </div>
 
-
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" name="amount" class="form-control"
+                                           placeholder="Enter Invoice Amount"
+                                           value="@if(old('amount')){{old('amount')}}@elseif(isset($invoice->amount)){{$invoice->amount}}@endif"
+                                           min="0" step="0.01" required>
+                                </div>
 
 
                                 <div class="form-group">
                                     <label for="description">Description </label>
                                     <textarea class="menubar" class=" form-control" placeholder="Place some text here"
                                               name="description" required>
-                                        @if(old('description')){{old('description')}}@elseif(isset($News->description)){{$News->description}}@endif
+                                        @if(old('description')){{old('description')}}@elseif(isset($invoice->description)){{$invoice->description}}@endif
                                     </textarea>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Link</label>
-                                    <input type="text" name="link" class="form-control"
-                                           placeholder="Enter link"
-                                           value="@if(old('link')){{old('link')}}@elseif(isset($News->link)){{$News->link}}@endif"
-                                           >
+                                    <label for="name">Invoice Date @if(old('invoice_date')){{old('invoice_date')}}@elseif(isset($invoice->invoice_date)){{date('y-m-d', strtotime($invoice->invoice_date))}}@endif</label>
+                                    <input type="date" name="invoice_date" class="form-control"
+                                           placeholder="Enter start date"
+                                           value="@if(old('invoice_date')){{old('invoice_date')}}@elseif(isset($invoice->invoice_date)){{date('Y-m-d', strtotime($invoice->invoice_date))}}@endif"
+                                    >
                                 </div>
 
+                                @if(isset($invoice->delivery_status))
 
 
+                                    <div class="form-group">
+                                        <label for="name">Delivery Status</label>
 
-                                <div class="form-group">
-                                    <label for="author_image">Image</label>
-                                    <input type="file" class="form-control" name="image"  @if(!isset($News)) @endif>
-                                    @if(isset($News->image))
-                                        <br>
-                                        <img src="{{url($News->image)}}" width="250" height="250">
+                                        <select name="delivery_status" class="form-control">
+                                            <option disabled {{(isset($invoice->delivery_status))?'':'selected'}}> choose Delivery Statsus</option>
+
+
+                                                    <option value="PENDING" {{(isset($invoice->delivery_status) && $invoice->delivery_status =='PENDING' )?'selected':''}})> PENDING </option>
+                                                    <option value="CONFIRMED" {{(isset($invoice->delivery_status) && $invoice->delivery_status =='CONFIRMED' )?'selected':''}})> CONFIRMED </option>
+                                                    <option value="ON_THE_WAY" {{(isset($invoice->delivery_status) && $invoice->delivery_status =='ON_THE_WAY' )?'selected':''}})> ON_THE_WAY </option>
+                                                    <option value="DELIVERED" {{(isset($invoice->delivery_status) && $invoice->delivery_status =='DELIVERED' )?'selected':''}})> DELIVERED </option>
+
+                                        </select>
+
+                                    </div>
                                     @endif
-                                </div>
-
-
-
-
 
                             </div>
                             <!-- /.card-body -->

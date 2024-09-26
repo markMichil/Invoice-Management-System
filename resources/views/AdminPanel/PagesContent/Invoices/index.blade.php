@@ -1,68 +1,105 @@
 @extends('AdminPanel.layouts.main')
 @section('content')
 
+    @if(auth()->user()->role === 'ADMIN')
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
-                <a class="btn btn-danger" href="{{route('news.create')}}">Create</a>
+                <a class="btn btn-danger" href="{{ route('invoices.create') }}">Create</a>
             </h3>
         </div>
     </div>
+    @endif
+
     <div class="card">
 
         <!-- /.card-header -->
         <div class="card-body">
             @include('AdminPanel.layouts.messages')
-            @if(count($news) > 0)
+
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-
                     <th>#</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Link</th>
-
+                    <th>Serial Number</th>
+                    <th>Amount</th>
+                    <th>Customer</th>
+                    <th>User</th>
+                    <th>Status</th>
+                    <th>Delivery</th>
+                    <th>Invoice Date</th>
                     <th>Control</th>
                 </tr>
                 </thead>
                 <tbody>
-               @foreach($news as $item)
-                   <tr>
-                       <td>{{$item->id}}</td>
-                       <td >{{$item->title}}</td>
-                       <td>{!! str_limit($item->description, $limit = 300, $end = '...') !!}</td>
-                       <td >{{$item->link}}</td>
-
-                       <td>
-                           <a class="btn btn-success" href="{{route('news.show',$item)}}">View</a>
-                           <a class="btn btn-dark" href="{{route('news.edit',$item)}}">Edit</a>
-                           <form action="{{route("news.destroy", $item)}}" method="post"
-                                 style="display:inline;">
-                               @csrf
-                               @method('delete')
-                               <button type="button" class="btn btn-danger btn-delete">Delete
-                               </button>
-                           </form>
-                     </td>
-                   </tr>
-               @endforeach
+                {{-- DataTables will populate this section dynamically --}}
                 </tbody>
                 <tfoot>
                 <tr>
                     <th>#</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Link</th>
-
+                    <th>Serial Number</th>
+                    <th>Amount</th>
+                    <th>Customer</th>
+                    <th>User</th>
+                    <th>Status</th>
+                    <th>Delivery</th>
+                    <th>Invoice Date</th>
                     <th>Control</th>
                 </tr>
                 </tfoot>
             </table>
-            @else
-                <h1 class="text-center">NO DATA</h1>
-            @endif
+
         </div>
         <!-- /.card-body -->
     </div>
+
+
+
+    <script>
+        $(document).ready(function() {
+            $('#example1').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('invoices.index') }}",
+                    type: 'GET'
+                },
+                columns: [
+                    { data: 'id' },                         // Invoice ID
+                    { data: 'serial_number' },              // Invoice Serial Number
+                    { data: 'amount' },                     // Invoice Amount
+                    { data: 'customer', name: 'customer' }, // Customer Name with Link
+                    { data: 'user', name: 'user' },         // User Name (Flattened in controller)
+                    { data: 'status' },                     // Status
+                    { data: 'delivery_status' },            // Delivery Status
+                    { data: 'invoice_date' },               // Invoice Date
+                    { data: 'control', orderable: false, searchable: false } // Control buttons
+                ]
+            });
+        });
+    </script>
+
+    <script>
+        function deleteInvoice(id) {
+            if (confirm("Are you sure you want to delete this invoice?")) {
+                $.ajax({
+                    url: '/invoices/' + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}' // Include the CSRF token for security
+                    },
+                    success: function(result) {
+                        // If successful, reload the DataTable
+                        $('#example1').DataTable().ajax.reload();
+                        alert('Invoice deleted successfully!');
+                    },
+                    error: function(xhr) {
+                        alert('Failed to delete the invoice.');
+                    }
+                });
+            }
+        }
+    </script>
+
+
 @endsection
