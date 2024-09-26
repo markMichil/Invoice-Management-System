@@ -21,7 +21,15 @@ class IsAdmin
 
 
         if (!$request->user() || $request->user()->role !== 'ADMIN') {
-            return $this->responseMessage(403,false,'Unauthorized YOU DONT HAS ADMIN PERMISSION',[]);
+
+
+            if ($request->expectsJson()) {
+                return $this->responseMessage(403, false, 'Unauthorized YOU DONT HAS ADMIN PERMISSION', []);
+            }
+
+            // For web requests, redirect back with an error message in the session
+            return redirect()->back()->with('error', 'Unauthorized YOU DONT HAS ADMIN PERMISSION');
+
 
         }
 

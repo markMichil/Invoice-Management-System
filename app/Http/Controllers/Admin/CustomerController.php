@@ -45,10 +45,10 @@ class CustomerController extends Controller
                 ->with('customer',$data['data'])
                 ->with('pageTitle', $this->pageTitle);
         }else{
-            $error[] = $data['msg'];
+
             return redirect()->back()
                 ->with('pageTitle', $this->pageTitle)
-                ->with('errors',$error);
+                ->with('error',$data['msg']);
         }
 
 

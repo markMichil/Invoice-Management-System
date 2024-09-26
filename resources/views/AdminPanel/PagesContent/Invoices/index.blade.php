@@ -1,6 +1,7 @@
 @extends('AdminPanel.layouts.main')
 @section('content')
 
+    @if(auth()->user()->role === 'ADMIN')
     <div class="card">
         <div class="card-header">
             <h3 class="card-title">
@@ -8,6 +9,8 @@
             </h3>
         </div>
     </div>
+    @endif
+
     <div class="card">
 
         <!-- /.card-header -->
@@ -75,4 +78,28 @@
             });
         });
     </script>
+
+    <script>
+        function deleteInvoice(id) {
+            if (confirm("Are you sure you want to delete this invoice?")) {
+                $.ajax({
+                    url: '/invoices/' + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}' // Include the CSRF token for security
+                    },
+                    success: function(result) {
+                        // If successful, reload the DataTable
+                        $('#example1').DataTable().ajax.reload();
+                        alert('Invoice deleted successfully!');
+                    },
+                    error: function(xhr) {
+                        alert('Failed to delete the invoice.');
+                    }
+                });
+            }
+        }
+    </script>
+
+
 @endsection

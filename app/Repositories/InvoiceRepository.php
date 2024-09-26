@@ -64,6 +64,10 @@ class InvoiceRepository implements InvoiceRepositoryInterface
             // Log the 'update' action
             $this->logAction('update', $invoice);
 
+
+            // Send notification email to the customer
+            $this->notifyCustomer($invoice);
+
             return ['status'=>true,'msg'=>'','data'=>$invoice];
 
         }catch (\Exception $exception){

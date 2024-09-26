@@ -14,9 +14,19 @@ class IsAdminOrEmployee
     public function handle(Request $request, Closure $next): Response
     {
         if (!$request->user() || ($request->user()->role !== 'ADMIN' && $request->user()->role !== 'EMPLOYEE')) {
-            return $this->responseMessage(403, false, 'Unauthorized', []);
+
+           if ($request->expectsJson()) {
+                return $this->responseMessage(403, false, 'Unauthorized', []);
+            }
+
+            // For web requests, redirect back with an error message in the session
+            return redirect()->back()->with('error', 'Unauthorized access');
+
         }
 
         return $next($request);
+
+
+
     }
 }

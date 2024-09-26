@@ -35,15 +35,33 @@
                             @csrf
                             {{isset($invoice)?method_field('PUT'):''}}
                             <div class="card-body">
+
                                 <div class="form-group">
-                                    <label for="name">Title</label>
-                                    <input type="text" name="title" class="form-control"
-                                           placeholder="Enter title"
-                                           value="@if(old('title')){{old('title')}}@elseif(isset($invoice->title)){{$invoice->title}}@endif"
-                                           required>
+                                    <label for="name">Customer</label>
+
+                                    <select name="customer_id" class="form-control">
+                                        <option disabled {{(isset($invoice->customer_id))?'':'selected'}}> choose Customer type</option>
+                                        @if(count($customers)>0)
+                                            @foreach($customers as $customer)
+                                                <option value="{{$customer->id}}" {{(isset($invoice->customer_id) && $invoice->customer_id ==$customer->id )?'selected':''}})> {{$customer->name}}</option>
+                                            @endforeach
+
+
+                                        @else
+                                            <option disabled> Add Customer First</option>
+                                        @endif
+
+                                    </select>
+
                                 </div>
 
-
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" name="amount" class="form-control"
+                                           placeholder="Enter Invoice Amount"
+                                           value="@if(old('amount')){{old('amount')}}@elseif(isset($invoice->amount)){{$invoice->amount}}@endif"
+                                           min="0" step="0.01" required>
+                                </div>
 
 
                                 <div class="form-group">
@@ -55,28 +73,32 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Link</label>
-                                    <input type="text" name="link" class="form-control"
-                                           placeholder="Enter link"
-                                           value="@if(old('link')){{old('link')}}@elseif(isset($invoice->link)){{$invoice->link}}@endif"
-                                           >
+                                    <label for="name">Invoice Date @if(old('invoice_date')){{old('invoice_date')}}@elseif(isset($invoice->invoice_date)){{date('y-m-d', strtotime($invoice->invoice_date))}}@endif</label>
+                                    <input type="date" name="invoice_date" class="form-control"
+                                           placeholder="Enter start date"
+                                           value="@if(old('invoice_date')){{old('invoice_date')}}@elseif(isset($invoice->invoice_date)){{date('Y-m-d', strtotime($invoice->invoice_date))}}@endif"
+                                    >
                                 </div>
 
+                                @if(isset($invoice->delivery_status))
 
 
+                                    <div class="form-group">
+                                        <label for="name">Delivery Status</label>
 
-                                <div class="form-group">
-                                    <label for="author_image">Image</label>
-                                    <input type="file" class="form-control" name="image"  @if(!isset($invoice)) @endif>
-                                    @if(isset($invoice->image))
-                                        <br>
-                                        <img src="{{url($invoice->image)}}" width="250" height="250">
+                                        <select name="delivery_status" class="form-control">
+                                            <option disabled {{(isset($invoice->delivery_status))?'':'selected'}}> choose Delivery Statsus</option>
+
+
+                                                    <option value="PENDING" {{(isset($invoice->delivery_status) && $invoice->delivery_status =='PENDING' )?'selected':''}})> PENDING </option>
+                                                    <option value="CONFIRMED" {{(isset($invoice->delivery_status) && $invoice->delivery_status =='CONFIRMED' )?'selected':''}})> CONFIRMED </option>
+                                                    <option value="ON_THE_WAY" {{(isset($invoice->delivery_status) && $invoice->delivery_status =='ON_THE_WAY' )?'selected':''}})> ON_THE_WAY </option>
+                                                    <option value="DELIVERED" {{(isset($invoice->delivery_status) && $invoice->delivery_status =='DELIVERED' )?'selected':''}})> DELIVERED </option>
+
+                                        </select>
+
+                                    </div>
                                     @endif
-                                </div>
-
-
-
-
 
                             </div>
                             <!-- /.card-body -->
